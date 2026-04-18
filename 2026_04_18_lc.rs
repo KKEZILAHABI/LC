@@ -1,34 +1,40 @@
-use std::collections::HashMap;
-
 impl Solution {
-    pub fn min_mirror_pair_distance(nums: Vec<i32>) -> i32 {
-        let mut seen: HashMap<i32, usize> = HashMap::new();
-        let mut min_dist = usize::MAX;
+    pub fn mirror_distance(n: i32) -> i32 {
+        
+        let mut num: i32 = n;
+        n.abs_diff(Self::reverser(&mut num)) as i32
 
-        for (j, &num) in nums.iter().enumerate() {
-            // Check if current number matches a previously reversed number
-            if let Some(&i) = seen.get(&num) {
-                min_dist = min_dist.min(j - i);
-            }
-
-            // Store reverse(nums[j]) for future matches
-            let rev = Self::reverse(num);
-            seen.insert(rev, j);
-        }
-
-        if min_dist == usize::MAX {
-            -1
-        } else {
-            min_dist as i32
-        }
     }
 
-    fn reverse(mut num: i32) -> i32 {
-        let mut rev = 0;
-        while num > 0 {
-            rev = rev * 10 + num % 10;
-            num /= 10;
+    pub fn reverser(n: &mut i32)-> i32{
+
+        if *n % 10 == 0{
+            while *n % 10 == 0{
+                *n /= 10;
+            }
         }
-        rev
+        
+        let mut n_str: String = n.to_string();
+        n_str = n_str.chars().rev().collect();
+        let ret_num = n_str.parse().unwrap();
+        ret_num
     }
 }
+
+// impl Solution {
+//     pub fn mirror_distance(n: i32) -> i32 {
+        
+//         let num: i32 = n;
+//         n.abs_diff(Self::reverser(num)) as i32
+
+//     }
+
+//     pub fn reverser(mut num: i32) -> i32 {
+//         let mut rev = 0;
+//         while num > 0 {
+//             rev = rev * 10 + num % 10;
+//             num /= 10;
+//         }
+//         rev
+//     }
+// }
