@@ -21,7 +21,8 @@ impl Solution {
     }
 }
 
-// impl Solution {
+// Optimized version without string conversion
+//  impl Solution {
 //     pub fn mirror_distance(n: i32) -> i32 {
         
 //         let num: i32 = n;
